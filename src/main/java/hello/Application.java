@@ -20,7 +20,8 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
+    //显示所有的bean
+//    @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
 
