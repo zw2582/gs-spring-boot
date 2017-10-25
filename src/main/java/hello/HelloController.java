@@ -6,14 +6,21 @@ import org.springframework.web.client.RestClientException;
 import hello.model.Book;
 import hello.model.Person;
 import hello.model.SpringUtil;
+import hello.remoting.server.Account;
+import hello.remoting.server.AccountService;
 import hello.repository.PersonRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +32,9 @@ public class HelloController {
 	
 	@Autowired
 	PersonRepository personRepository;
+	
+	@Autowired
+	AccountService accountSer;
     
     @RequestMapping("/message")
     public String index() {
@@ -75,6 +85,11 @@ public class HelloController {
     public void testException() {
 //    	throw new RestClientException("caca");
     	throw new IllegalArgumentException("没参数");
+    }
+    
+    @GetMapping("/test-rmi")
+    public List<Account> testRmi() {
+    	return accountSer.getAccounts("caca");
     }
     
 }
